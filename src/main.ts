@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import firebase from "firebase/app";
+import vuetify from "./plugins/vuetify";
+import "@babel/polyfill";
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
@@ -22,9 +24,9 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");
