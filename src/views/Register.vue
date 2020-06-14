@@ -39,13 +39,13 @@
                   ></v-text-field>
                 </ValidationProvider>
 
-                <ValidationProvider rules="min:5|required" v-slot="{ errors }">
+                <ValidationProvider rules="min:6|required" v-slot="{ errors }">
                   <v-text-field
                     id="password"
                     v-model="password"
                     label="Password"
                     name="password"
-                    hint="At least 5 characters"
+                    hint="At least 6 characters"
                     prepend-icon="mdi-lock"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="showPassword ? 'text' : 'password'"

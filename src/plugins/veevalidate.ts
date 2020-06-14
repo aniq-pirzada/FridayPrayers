@@ -16,7 +16,7 @@ extend("email", {
 
 extend("min", {
   ...min,
-  message: "Minimum 5 characters"
+  message: "Minimum 6 characters"
 });
 
 // Vue.use(VeeValidate);

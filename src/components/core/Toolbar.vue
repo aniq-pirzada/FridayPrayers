@@ -28,6 +28,16 @@
           <v-icon>{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
         </v-btn>
+
+        <v-btn
+          text
+          v-if="loggedIn"
+          @click="signOut"
+          class="hidden-sm-and-down btnLogout"
+        >
+          <v-icon left>mdi-exit-to-app</v-icon>
+          {{ "LOGOUT" }}
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -60,22 +70,34 @@
 <script>
 import ResizeText from "vue-resize-text";
 import { mapGetters } from "vuex";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 export default {
   name: "Toolbar",
   directives: {
     ResizeText
   },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
+  },
   data() {
     return {
       isDark: false,
-      sidebar: false
+      sidebar: false,
+      loggedIn: false
     };
   },
   computed: {
     ...mapGetters(["appTitle", "user"]),
     menuItems() {
-      if (this.isTokenSet) {
+      if (this.loggedIn) {
         return [
           {
             title: "Home",
@@ -116,6 +138,17 @@ export default {
           class: "btnLogin"
         }
       ];
+    }
+  },
+  methods: {
+    async signOut() {
+      try {
+        const data = await firebase.auth().signOut();
+        console.log(data);
+        this.$router.replace({ name: "Home" });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };
