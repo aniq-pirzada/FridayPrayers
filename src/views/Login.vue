@@ -5,14 +5,14 @@
         <v-card class="elevation-12">
           <v-form @submit.prevent="submit">
             <v-toolbar color="primary" dark flat>
-              <v-toolbar-title>Login form</v-toolbar-title>
+              <v-toolbar-title>Login</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <v-text-field
                 v-model="email"
                 label="Email"
                 name="login"
-                prepend-icon="mdi-account"
+                prepend-icon="mdi-at"
                 type="text"
               ></v-text-field>
 

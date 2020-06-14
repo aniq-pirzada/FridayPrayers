@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 import firebase from "firebase/app";
 import vuetify from "./plugins/vuetify";
+import "@/plugins/veevalidate";
 import "@babel/polyfill";
 
 Vue.prototype.$axios = axios;
