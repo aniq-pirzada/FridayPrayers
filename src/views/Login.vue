@@ -9,9 +9,12 @@
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-alert v-model="alert" text type="error" dismissible>
+                <v-alert v-if="error" text type="error" dismissible>
                   {{ error }}
                 </v-alert>
+                <!-- <v-alert v-if="error" text type="error" dismissible>
+                  {{ error }}
+                </v-alert> -->
                 <ValidationProvider rules="email|required" v-slot="{ errors }">
                   <v-text-field
                     v-model="email"
@@ -52,36 +55,49 @@
 </template>
 
 <script>
-import Parse from "parse";
+// import Parse from "parse";
+import { mapActions, mapState } from "vuex";
 
 export default {
-  methods: {
-    submit() {
-      Parse.User.logIn(this.email, this.password)
-        .then(user => {
-          console.log(user);
-        })
-        .catch(error => {
-          this.alert = true;
-          switch (error.code) {
-            case 101:
-              this.error = "Invalid email / password";
-              break;
-            default:
-              console.log(error.code);
-              this.error = "Unkown error, please contact";
-          }
-        });
-    }
-  },
   data() {
     return {
       email: "",
       password: "",
-      error: "",
       alert: false,
       showPassword: false
     };
+  },
+  computed: {
+    // ...mapState(["error"])
+    error() {
+      return this.$store.getters.error;
+    }
+  },
+  methods: {
+    ...mapActions({ login: "login" }),
+    submit() {
+      this.login({ email: this.email, password: this.password });
+      // }
+      //   Parse.User.logIn(this.email, this.password)
+      //     .then(user => {
+      //       console.log(user);
+      //     })
+      //     .catch(error => {
+      //       this.alert = true;
+      //       switch (error.code) {
+      //         case 101:
+      //           this.error = "Invalid email / password";
+      //           break;
+      //         default:
+      //           console.log(error.code);
+      //           this.error = "Unkown error, please contact";
+      //       }
+      //     });
+      // }
+    },
+    onDismissed() {
+      this.$store.dispatch("clearError");
+    }
   }
 };
 </script>

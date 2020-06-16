@@ -69,7 +69,7 @@
 
 <script>
 import ResizeText from "vue-resize-text";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Toolbar",
@@ -93,7 +93,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["appTitle"]),
+    ...mapGetters(["getCurrentUser"]),
     menuItems() {
       if (this.loggedIn) {
         return [
@@ -139,15 +139,10 @@ export default {
     }
   },
   methods: {
-    async signOut() {
-      // try {
-      //   const data = await firebase.auth().signOut();
-      //   console.log(data);
-      //   this.$router.replace({ name: "Home" });
-      // } catch (err) {
-      //   console.log(err);
-      // }
-    }
+    
+  },
+  mutations: {
+    ...mapGetters(["setCurrentUser"])
   }
 };
 </script>

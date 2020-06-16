@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Parse from "parse";
 import mosques from "./modules/mosques";
+import user from "./modules/user";
 
 Vue.use(Vuex);
 
@@ -10,6 +10,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    mosques
+    mosques,
+    user
   }
 });
