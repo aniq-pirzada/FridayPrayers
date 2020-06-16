@@ -52,32 +52,24 @@
 </template>
 
 <script>
-import * as firebase from "firebase/app";
-import "firebase/auth";
+import Parse from "parse";
 
 export default {
   methods: {
-    async submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$router.replace({ name: "Home" });
+    submit() {
+      Parse.User.logIn(this.email, this.password)
+        .then(user => {
+          console.log(user);
         })
         .catch(error => {
+          this.alert = true;
           switch (error.code) {
-            case "auth/wrong-password":
-              this.error = "Incorrect username / password";
-              this.alert = true;
-              break;
-            case "auth/user-not-found":
-              this.error = "Incorrect username / password";
-              this.alert = true;
+            case 101:
+              this.error = "Invalid email / password";
               break;
             default:
-              this.error = "Unkown error";
-              this.alert = true;
-              break;
+              console.log(error.code);
+              this.error = "Unkown error, please contact";
           }
         });
     }

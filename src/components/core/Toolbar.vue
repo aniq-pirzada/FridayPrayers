@@ -70,8 +70,6 @@
 <script>
 import ResizeText from "vue-resize-text";
 import { mapGetters } from "vuex";
-import * as firebase from "firebase/app";
-import "firebase/auth";
 
 export default {
   name: "Toolbar",
@@ -79,13 +77,13 @@ export default {
     ResizeText
   },
   created() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    });
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     this.loggedIn = true;
+    //   } else {
+    //     this.loggedIn = false;
+    //   }
+    // });
   },
   data() {
     return {
@@ -95,7 +93,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["appTitle", "user"]),
+    ...mapGetters(["appTitle"]),
     menuItems() {
       if (this.loggedIn) {
         return [
@@ -107,14 +105,14 @@ export default {
           },
           {
             title: "About",
-            link: "about",
+            link: "About",
             icon: "mdi-help-circle-outline",
             class: "btnAbout"
           },
           {
             title: "My Profile",
-            link: "profile",
-            icon: "mdi-face",
+            link: "Profile",
+            icon: "mdi-account",
             class: "btnProfile"
           }
         ];
@@ -142,13 +140,13 @@ export default {
   },
   methods: {
     async signOut() {
-      try {
-        const data = await firebase.auth().signOut();
-        console.log(data);
-        this.$router.replace({ name: "Home" });
-      } catch (err) {
-        console.log(err);
-      }
+      // try {
+      //   const data = await firebase.auth().signOut();
+      //   console.log(data);
+      //   this.$router.replace({ name: "Home" });
+      // } catch (err) {
+      //   console.log(err);
+      // }
     }
   }
 };

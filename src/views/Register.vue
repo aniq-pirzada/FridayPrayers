@@ -68,29 +68,36 @@
 </template>
 
 <script>
-import * as firebase from "firebase/app";
-import "firebase/auth";
+import Parse from "parse";
 
 export default {
   methods: {
-    async submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+    submit() {
+      const user = new Parse.User();
+      user.set("username", this.email);
+      user.set("email", this.email);
+      user.set("password", this.password);
+      user.set("name", this.name);
+
+      user
+        .signUp()
+        .then(result => {
+          console.log(result);
+        })
         .catch(error => {
+          this.alert = true;
           switch (error.code) {
-            case "auth/invalid-email":
-              this.error = "Invalid Email";
-              this.alert = true;
+            case 200:
+              this.error = "The username is missing or empty";
               break;
-            case "auth/email-already-in-use":
+            case 201:
+              this.error = "The password is missing or empty";
+              break;
+            case 202:
               this.error = "Email already registered";
-              this.alert = true;
               break;
             default:
-              this.error = "Unkown error";
-              this.alert = true;
-              break;
+              this.error = "Unkown error, please contact";
           }
         });
     }
