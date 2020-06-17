@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
+      <v-col cols="12" sm="8" md="5">
         <v-card class="elevation-12">
           <validation-observer ref="observer" v-slot="{ handleSubmit }">
             <v-form
@@ -12,7 +12,7 @@
                 <v-toolbar-title>Register</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-alert v-model="alert" text type="error" dismissible>
+                <v-alert v-if="error" text type="error" dismissible>
                   {{ error }}
                 </v-alert>
                 <ValidationProvider rules="required" v-slot="{ errors }">
@@ -68,39 +68,22 @@
 </template>
 
 <script>
-import Parse from "parse";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   methods: {
+    ...mapActions({ register: "register" }),
     submit() {
-      const user = new Parse.User();
-      user.set("username", this.email);
-      user.set("email", this.email);
-      user.set("password", this.password);
-      user.set("name", this.name);
-
-      user
-        .signUp()
-        .then(result => {
-          console.log(result);
-        })
-        .catch(error => {
-          this.alert = true;
-          switch (error.code) {
-            case 200:
-              this.error = "The username is missing or empty";
-              break;
-            case 201:
-              this.error = "The password is missing or empty";
-              break;
-            case 202:
-              this.error = "Email already registered";
-              break;
-            default:
-              this.error = "Unkown error, please contact";
-          }
-        });
+      // const user = new Parse.User();
+      this.register({
+        name: this.name,
+        email: this.email,
+        password: this.password
+      });
     }
+  },
+  computed: {
+    ...mapGetters(["error"])
   },
 
   data() {
@@ -108,8 +91,6 @@ export default {
       name: "",
       email: "",
       password: "",
-      error: "",
-      alert: false,
       showPassword: false
     };
   }

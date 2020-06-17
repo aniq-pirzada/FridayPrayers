@@ -10,7 +10,6 @@
 
 <script>
 import CardItem from "@/components/CardItem.vue";
-import Parse from "parse";
 import { mapGetters, mapActions } from "vuex";
 
 export default {

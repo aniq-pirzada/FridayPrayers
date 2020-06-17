@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
+      <v-col cols="12" sm="8" md="5">
         <v-card class="elevation-12">
           <validation-observer ref="observer" v-slot="{ handleSubmit }">
             <v-form @submit.stop.prevent="handleSubmit(submit)">
@@ -12,9 +12,6 @@
                 <v-alert v-if="error" text type="error" dismissible>
                   {{ error }}
                 </v-alert>
-                <!-- <v-alert v-if="error" text type="error" dismissible>
-                  {{ error }}
-                </v-alert> -->
                 <ValidationProvider rules="email|required" v-slot="{ errors }">
                   <v-text-field
                     v-model="email"
@@ -55,48 +52,33 @@
 </template>
 
 <script>
-// import Parse from "parse";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       email: "",
       password: "",
-      alert: false,
       showPassword: false
     };
   },
   computed: {
-    // ...mapState(["error"])
-    error() {
-      return this.$store.getters.error;
-    }
+    ...mapGetters(["error", "user"])
   },
   methods: {
     ...mapActions({ login: "login" }),
     submit() {
       this.login({ email: this.email, password: this.password });
-      // }
-      //   Parse.User.logIn(this.email, this.password)
-      //     .then(user => {
-      //       console.log(user);
-      //     })
-      //     .catch(error => {
-      //       this.alert = true;
-      //       switch (error.code) {
-      //         case 101:
-      //           this.error = "Invalid email / password";
-      //           break;
-      //         default:
-      //           console.log(error.code);
-      //           this.error = "Unkown error, please contact";
-      //       }
-      //     });
-      // }
     },
     onDismissed() {
       this.$store.dispatch("clearError");
+    }
+  },
+  watch: {
+    user(user) {
+      if (user !== null && user !== undefined) {
+        this.$router.push("/");
+      }
     }
   }
 };

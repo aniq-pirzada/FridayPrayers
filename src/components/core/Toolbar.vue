@@ -31,7 +31,7 @@
 
         <v-btn
           text
-          v-if="loggedIn"
+          v-if="user"
           @click="signOut"
           class="hidden-sm-and-down btnLogout"
         >
@@ -88,14 +88,15 @@ export default {
   data() {
     return {
       isDark: false,
-      sidebar: false,
-      loggedIn: false
+      sidebar: false
     };
   },
   computed: {
-    ...mapGetters(["getCurrentUser"]),
+    ...mapGetters(["user"]),
     menuItems() {
-      if (this.loggedIn) {
+      // console.log("User");
+      // console.log(this.user);
+      if (this.user) {
         return [
           {
             title: "Home",
@@ -139,7 +140,10 @@ export default {
     }
   },
   methods: {
-    
+    ...mapActions(["logout"]),
+    signOut() {
+      this.logout();
+    }
   },
   mutations: {
     ...mapGetters(["setCurrentUser"])
