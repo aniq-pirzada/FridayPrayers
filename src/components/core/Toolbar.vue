@@ -111,6 +111,12 @@ export default {
             class: "btnAbout"
           },
           {
+            title: "Mosques",
+            link: "Mosques",
+            icon: "mdi-islam",
+            class: "btnAbout"
+          },
+          {
             title: "My Profile",
             link: "Profile",
             icon: "mdi-account",
