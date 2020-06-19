@@ -1,27 +1,39 @@
+<style scoped>
+.sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+}
+</style>
 <template>
-  <v-container>
-    <v-sheet id="scrolling-techniques">
-      <v-autocomplete
-        v-model="model"
-        :items="items"
-        :loading="isLoading"
-        :search-input.sync="search"
-        chips
-        clearable
+  <div>
+    <v-app-bar
+      flat
+      absolute
+      scroll-target="#scrolling-techniques"
+      class="sticky"
+    >
+      <v-spacer></v-spacer>
+      <v-text-field
+        label="Search"
         hide-details
-        hide-selected
-        item-text="name"
-        item-value="symbol"
-        label="Search for a coin..."
+        single-line
         solo
-      ></v-autocomplete>
-      <v-row dense>
-        <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
-          <CardItem v-bind:mosque="mosque"></CardItem>
-        </v-col>
-      </v-row>
-    </v-sheet>
-  </v-container>
+        clearable
+        append-icon="mdi-magnify"
+      ></v-text-field>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    <v-container>
+      <v-sheet id="scrolling-techniques">
+        <v-row dense>
+          <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
+            <CardItem v-bind:mosque="mosque"></CardItem>
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-container>
+  </div>
 </template>
 
 <script>

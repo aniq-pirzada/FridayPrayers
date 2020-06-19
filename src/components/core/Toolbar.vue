@@ -111,9 +111,9 @@ export default {
             class: "btnAbout"
           },
           {
-            title: "Mosques",
+            title: "Find",
             link: "Mosques",
-            icon: "mdi-islam",
+            icon: "mdi-file-search-outline",
             class: "btnAbout"
           },
           {

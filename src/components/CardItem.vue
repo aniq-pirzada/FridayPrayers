@@ -20,23 +20,11 @@
           }}
         </v-list-item-subtitle>
       </v-list-item-content>
-
       <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
     </v-list-item>
-
     <v-card-actions>
       <v-btn text>Register</v-btn>
     </v-card-actions>
-    <!-- <v-toolbar color="primary" dark flat>
-      <v-toolbar-title>{{ mosque.get("name") }}</v-toolbar-title>
-    </v-toolbar>
-    <v-card-text>
-      {{ mosque.get("address").line1 + " " + mosque.get("address").line2 }}
-    </v-card-text>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" type="submit">{{ "Register" }}</v-btn>
-    </v-card-actions> -->
   </v-card>
 </template>
 
