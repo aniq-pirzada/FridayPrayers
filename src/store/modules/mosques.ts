@@ -1,17 +1,22 @@
 import Parse from "parse";
-
 const state = {
-  mosques: []
+  mosques: [],
+  count: 0,
+  limit: 25
 };
 
 const getters = {
-  allMosques: state => state.mosques
+  allMosques: state => state.mosques,
+  maxPages: state => Math.ceil(state.count / state.limit)
 };
 
 const actions = {
-  async fetchMosques({ commit }) {
+  async fetchMosques({ commit }, payload) {
     const Mosque = Parse.Object.extend("Mosque");
     const query = new Parse.Query(Mosque);
+    query.limit(state.limit);
+    query.withCount();
+    query.skip((payload - 1) * state.limit);
     query.find().then(
       results => {
         if (typeof document !== "undefined") {
@@ -31,7 +36,13 @@ const actions = {
 };
 
 const mutations = {
-  setMosques: (state, mosques) => (state.mosques = mosques)
+  setMosques: (state, mosques) => {
+    console.log(mosques.results);
+    // Array.prototype.push.apply(state.mosques, mosques.results);
+    state.mosques = [...state.mosques, ...mosques.results];
+    // state.mosques = mosques.results;
+    state.count = mosques.count;
+  }
 };
 
 export default {

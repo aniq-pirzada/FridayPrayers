@@ -32,23 +32,35 @@
           </v-col>
         </v-row>
       </v-sheet>
+      <observer v-on:intersect="intersected" />
     </v-container>
   </div>
 </template>
 
 <script>
 import CardItem from "@/components/CardItem.vue";
+import Observer from "@/components/Observer.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
-    CardItem
+    CardItem,
+    Observer
   },
-  methods: { ...mapActions(["fetchMosques"]) },
-  computed: mapGetters(["allMosques"]),
-  created() {
-    this.fetchMosques();
+  methods: {
+    ...mapActions(["fetchMosques"]),
+    intersected() {
+      console.log("intersected");
+      this.fetchMosques(this.page++);
+    }
+  },
+  computed: mapGetters(["allMosques", "maxPages"]),
+  data() {
+    return {
+      page: 1,
+      observer: null
+    };
   }
 };
 </script>
