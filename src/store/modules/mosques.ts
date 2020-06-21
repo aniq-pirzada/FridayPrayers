@@ -11,18 +11,21 @@ const getters = {
 };
 
 const actions = {
-  async fetchMosques({ commit }, payload) {
+  async findMosqueByName({ commit }, payload) {
     const Mosque = Parse.Object.extend("Mosque");
     const query = new Parse.Query(Mosque);
+    if (payload.searchString) {
+      query.fullText("name", payload.searchString);
+      console.log(payload.searchString);
+    }
     query.limit(state.limit);
     query.withCount();
-    query.skip((payload - 1) * state.limit);
+    query.skip((payload.skip - 1) * state.limit);
     query.find().then(
       results => {
         if (typeof document !== "undefined") {
           commit("setMosques", results);
         }
-        // console.log(`ParseObjects found: ${JSON.stringify(results)}`);
       },
       error => {
         if (typeof document !== "undefined")
@@ -42,6 +45,10 @@ const mutations = {
     state.mosques = [...state.mosques, ...mosques.results];
     // state.mosques = mosques.results;
     state.count = mosques.count;
+  },
+
+  clearMosques: state => {
+    state.mosques = [];
   }
 };
 

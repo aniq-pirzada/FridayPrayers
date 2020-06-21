@@ -20,7 +20,10 @@
         single-line
         solo
         clearable
+        v-model="searchText"
         append-icon="mdi-magnify"
+        @click:append="search"
+        @keydown.enter="search"
       ></v-text-field>
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -40,7 +43,7 @@
 <script>
 import CardItem from "@/components/CardItem.vue";
 import Observer from "@/components/Observer.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "Home",
@@ -49,16 +52,25 @@ export default {
     Observer
   },
   methods: {
-    ...mapActions(["fetchMosques"]),
+    ...mapActions(["findMosqueByName"]),
+    ...mapMutations(["clearMosques"]),
     intersected() {
-      console.log("intersected");
-      this.fetchMosques(this.page++);
+      console.log(this.page);
+      this.findMosqueByName({
+        skip: this.page++,
+        searchString: this.searchText
+      });
+    },
+    search() {
+      this.page = 1;
+      this.clearMosques();
     }
   },
   computed: mapGetters(["allMosques", "maxPages"]),
   data() {
     return {
       page: 1,
+      searchText: null,
       observer: null
     };
   }
