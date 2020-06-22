@@ -2,16 +2,19 @@ import Parse from "parse";
 const state = {
   mosques: [],
   count: 0,
-  limit: 25
+  limit: 25,
+  loading: false
 };
 
 const getters = {
   allMosques: state => state.mosques,
-  maxPages: state => Math.ceil(state.count / state.limit)
+  mosquesLoading: state => state.loading
 };
 
 const actions = {
   async findMosqueByName({ commit }, payload) {
+    console.log(payload.skip);
+    commit("setLoading", true);
     const Mosque = Parse.Object.extend("Mosque");
     const query = new Parse.Query(Mosque);
     if (payload.searchString) {
@@ -24,10 +27,12 @@ const actions = {
     query.find().then(
       results => {
         if (typeof document !== "undefined") {
+          commit("setLoading", false);
           commit("setMosques", results);
         }
       },
       error => {
+        commit("setLoading", false);
         if (typeof document !== "undefined")
           console.log(
             `Error while fetching ParseObjects: ${JSON.stringify(error)}`
@@ -46,9 +51,11 @@ const mutations = {
     // state.mosques = mosques.results;
     state.count = mosques.count;
   },
-
   clearMosques: state => {
     state.mosques = [];
+  },
+  setLoading(state, payload) {
+    state.loading = payload;
   }
 };
 

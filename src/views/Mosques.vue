@@ -20,6 +20,7 @@
         single-line
         solo
         clearable
+        v-bind:loading="mosquesLoading"
         v-model="searchText"
         append-icon="mdi-magnify"
         @click:append="search"
@@ -28,6 +29,9 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-container>
+      <v-alert v-if="!mosquesLoading && allMosques.length < 1" text type="info">
+        {{ "No results found" }}
+      </v-alert>
       <v-sheet id="scrolling-techniques">
         <v-row dense>
           <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
@@ -35,8 +39,8 @@
           </v-col>
         </v-row>
       </v-sheet>
-      <observer v-on:intersect="intersected" />
     </v-container>
+    <observer v-on:intersect="intersected" />
   </div>
 </template>
 
@@ -51,11 +55,18 @@ export default {
     CardItem,
     Observer
   },
+  mounted() {
+    this.page = 1;
+    this.clearMosques();
+    this.findMosqueByName({
+      skip: this.page++,
+      searchString: this.searchText
+    });
+  },
   methods: {
     ...mapActions(["findMosqueByName"]),
     ...mapMutations(["clearMosques"]),
     intersected() {
-      console.log(this.page);
       this.findMosqueByName({
         skip: this.page++,
         searchString: this.searchText
@@ -64,14 +75,17 @@ export default {
     search() {
       this.page = 1;
       this.clearMosques();
+      this.findMosqueByName({
+        skip: this.page++,
+        searchString: this.searchText
+      });
     }
   },
-  computed: mapGetters(["allMosques", "maxPages"]),
+  computed: mapGetters(["allMosques", "mosquesLoading"]),
   data() {
     return {
       page: 1,
-      searchText: null,
-      observer: null
+      searchText: null
     };
   }
 };
