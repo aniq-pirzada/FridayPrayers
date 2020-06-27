@@ -26,22 +26,19 @@ const routes: Array<RouteConfig> = [
     component: Register
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: About
-  },
-  {
     path: "/profile",
     name: "Profile",
     component: Profile
   },
   {
-    path: "/mosques",
+    path: "/mosques/",
     name: "Mosques",
     component: Mosque
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: About
   }
 ];
 
