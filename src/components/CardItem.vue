@@ -2,7 +2,7 @@
   <v-card class="elevation-12">
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="overline mb-4">OVERLINE</div>
+        <div class="overline mb-4">{{ distance }} mi</div>
         <v-list-item-title class="headline mb-1">
           {{ mosque.get("name") }}
         </v-list-item-title>
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  props: ["mosque"]
+  props: ["mosque", "distance"]
 };
 </script>
 

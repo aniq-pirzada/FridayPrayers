@@ -48,7 +48,10 @@
       <v-sheet id="scrolling-techniques">
         <v-row dense>
           <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
-            <CardItem v-bind:mosque="mosque"></CardItem>
+            <CardItem
+              v-bind:mosque="mosque"
+              v-bind:distance="distance(mosque.get('location'))"
+            ></CardItem>
           </v-col>
         </v-row>
         <observer v-on:intersect="search" />
@@ -85,19 +88,16 @@ export default {
     async findLocation() {
       const postcodes = new PostcodesIO();
       const postcode = await postcodes.lookup(this.postcode);
-      console.log(postcode);
       if (postcode) return postcode;
       else return null;
     },
     async search(resetPage) {
-      console.log(resetPage);
       if (resetPage) {
         this.page = 1;
         this.clearMosques();
       }
       if (!this.location) {
         const postcode = await this.findLocation();
-        console.log("postcode ", postcode);
         if (postcode) {
           this.location = {
             latitude: postcode.latitude,
@@ -127,6 +127,30 @@ export default {
           this.selectedRadius
       );
       this.search(true);
+    },
+    distance(mosqueLocation) {
+      const lat1 = mosqueLocation.latitude;
+      const lon1 = mosqueLocation.longitude;
+      const lat2 = this.location.latitude;
+      const lon2 = this.location.longitude;
+      if (lat1 == lat2 && lon1 == lon2) {
+        return 0;
+      } else {
+        const radlat1 = (Math.PI * lat1) / 180;
+        const radlat2 = (Math.PI * lat2) / 180;
+        const theta = lon1 - lon2;
+        const radtheta = (Math.PI * theta) / 180;
+        let dist =
+          Math.sin(radlat1) * Math.sin(radlat2) +
+          Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+          dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = (dist * 180) / Math.PI;
+        dist = dist * 60 * 1.1515;
+        return dist.toFixed(2);
+      }
     }
   },
   computed: mapGetters(["allMosques", "mosquesLoading", "mosqueCount"]),
