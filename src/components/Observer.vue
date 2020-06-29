@@ -10,6 +10,12 @@ export default {
       observer: null
     };
   },
+  methods: {
+    disconnect() {
+      console.log("Disconnect");
+      this.observer.disconnect();
+    }
+  },
   mounted() {
     this.observer = new IntersectionObserver(([entry]) => {
       if (entry && entry.isIntersecting) {

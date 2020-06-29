@@ -6,12 +6,7 @@
         query: { postcode: 'postcode', radius: 'radius' }
       }"
     ></router-link>
-    <v-app-bar
-      flat
-      absolute
-      scroll-target="#scrolling-techniques"
-      class="sticky"
-    >
+    <v-app-bar flat absolute scroll-target="#scrolling" class="sticky">
       <v-spacer></v-spacer>
       <v-text-field
         label="Search"
@@ -45,7 +40,7 @@
       <v-alert v-else-if="allMosques.length < 1" text type="info">
         {{ "No results found" }}
       </v-alert>
-      <v-sheet id="scrolling-techniques">
+      <v-sheet id="scrolling">
         <v-row dense>
           <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
             <CardItem
@@ -54,7 +49,7 @@
             ></CardItem>
           </v-col>
         </v-row>
-        <observer v-on:intersect="search" />
+        <observer ref="observer" v-on:intersect="search" />
       </v-sheet>
     </v-container>
   </div>
@@ -92,6 +87,7 @@ export default {
       else return null;
     },
     async search(resetPage) {
+      // this.$refs.observer.disconnect();
       if (resetPage) {
         this.page = 1;
         this.clearMosques();
@@ -113,6 +109,7 @@ export default {
         location: this.location,
         radius: this.selectedRadius
       });
+      console.log("Obserfer Ref: ", this.$refs);
     },
     async changeRoute() {
       this.error = false;
