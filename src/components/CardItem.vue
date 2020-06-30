@@ -23,7 +23,7 @@
       <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
     </v-list-item>
     <v-card-actions>
-      <RegisterForm v-bind:mosque="this.mosque" />
+      <RegisterForm v-bind:mosque="mosque" />
     </v-card-actions>
   </v-card>
 </template>
