@@ -54,6 +54,7 @@ const actions = {
     });
     query.withinMiles("location", location, payload.radius);
     query.limit(state.limit);
+    query.equalTo("active", true);
     query.withCount();
     query.skip((payload.skip - 1) * state.limit);
     query.find().then(
