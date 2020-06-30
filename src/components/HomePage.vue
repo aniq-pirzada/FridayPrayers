@@ -17,31 +17,28 @@
                   ]"
                   class="font-weight-light"
                 >
-                  WELCOME TO
+                  Search for a mosque to register for Jummah Prayers
                 </span>
-
                 <br />
-
-                <span
-                  :class="[
-                    $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4'
-                  ]"
-                  class="font-weight-black"
-                >
-                  VUETIFY
-                </span>
-                <v-text-field
-                  label="Postcode"
-                  hide-details
-                  single-line
-                  v-model="postcode"
-                  @click:append="changeRoute"
-                  @keydown.enter="changeRoute"
-                  solo
-                  clearable
-                  append-icon="mdi-magnify"
-                />
+                <br />
+                <validation-observer ref="observer" v-slot="{ handleSubmit }">
+                  <v-form @submit.stop.prevent="handleSubmit(changeRoute)">
+                    <ValidationProvider rules="required" v-slot="{}">
+                      <v-text-field
+                        label="Postcode"
+                        hide-details
+                        single-line
+                        v-model="postcode"
+                        solo
+                        clearable
+                        append-icon="mdi-magnify"
+                      />
+                    </ValidationProvider>
+                  </v-form>
+                </validation-observer>
               </v-col>
+              <br />
+              <br />
               <v-btn
                 class="align-self-end"
                 fab
