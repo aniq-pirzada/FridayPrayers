@@ -7,7 +7,7 @@
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
         }"
       >
-        <v-theme-provider dark>
+        <v-theme-provider light>
           <v-container fill-height>
             <v-row align="center" class="white--text mx-auto" justify="center">
               <v-col class="white--text text-center" cols="12" tag="h1">
@@ -37,11 +37,9 @@
                   </v-form>
                 </validation-observer>
               </v-col>
-              <br />
-              <br />
               <v-btn
+                dark
                 class="align-self-end"
-                fab
                 outlined
                 @click="$vuetify.goTo('#about-me')"
               >

@@ -32,7 +32,7 @@
     </v-app-bar>
 
     <v-navigation-drawer
-      z-index:2
+      style="z-index: 100"
       v-model="sidebar"
       absolute
       disable-resize-watcher
