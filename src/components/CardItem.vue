@@ -23,13 +23,15 @@
       <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
     </v-list-item>
     <v-card-actions>
-      <v-btn text>Register</v-btn>
+      <RegisterForm v-bind:mosque="this.mosque" />
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import RegisterForm from "@/components/core/RegisterForm.vue";
 export default {
+  components: { RegisterForm },
   props: ["mosque", "distance"]
 };
 </script>

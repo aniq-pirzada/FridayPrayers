@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VeeValidate from "vee-validate";
 import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
-import { required, email, min } from "vee-validate/dist/rules";
+import { required, email, min, regex } from "vee-validate/dist/rules";
 
 // The types of validators used in the project
 extend("required", {
@@ -17,6 +17,11 @@ extend("email", {
 extend("min", {
   ...min,
   message: "Minimum 6 characters"
+});
+
+extend("regex", {
+  ...regex,
+  message: "Invalid phone number"
 });
 
 // Vue.use(VeeValidate);

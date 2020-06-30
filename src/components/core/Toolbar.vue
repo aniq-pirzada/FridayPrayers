@@ -28,16 +28,6 @@
           <v-icon>{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
         </v-btn>
-
-        <v-btn
-          text
-          v-if="user"
-          @click="signOut"
-          class="hidden-sm-and-down btnLogout"
-        >
-          <v-icon left>mdi-exit-to-app</v-icon>
-          {{ "LOGOUT" }}
-        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -76,15 +66,6 @@ export default {
   directives: {
     ResizeText
   },
-  created() {
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     this.loggedIn = true;
-    //   } else {
-    //     this.loggedIn = false;
-    //   }
-    // });
-  },
   data() {
     return {
       isDark: false,
@@ -92,55 +73,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["user"]),
     menuItems() {
-      // console.log("User");
-      // console.log(this.user);
-      if (this.user) {
-        return [
-          {
-            title: "Home",
-            link: "Home",
-            icon: "mdi-home",
-            class: "btnHome"
-          },
-          {
-            title: "About",
-            link: "About",
-            icon: "mdi-help-circle-outline",
-            class: "btnAbout"
-          },
-          {
-            title: "Find",
-            link: "Mosques",
-            icon: "mdi-file-search-outline",
-            class: "btnAbout"
-          },
-          {
-            title: "My Profile",
-            link: "Profile",
-            icon: "mdi-account",
-            class: "btnProfile"
-          }
-        ];
-      }
       return [
         {
           title: "Home",
           link: "Home",
-          icon: "mdi-home"
+          icon: "mdi-home",
+          class: "btnHome"
         },
         {
-          title: "Login",
-          link: "Login",
-          icon: "mdi-lock",
-          class: "btnLogin"
+          title: "About",
+          link: "About",
+          icon: "mdi-help-circle-outline",
+          class: "btnAbout"
         },
         {
-          title: "Sign Up",
-          link: "Register",
-          icon: "mdi-plus-circle-outline",
-          class: "btnLogin"
+          title: "Find",
+          link: "Mosques",
+          icon: "mdi-file-search-outline",
+          class: "btnAbout"
         }
       ];
     }
@@ -150,9 +101,6 @@ export default {
     signOut() {
       this.logout();
     }
-  },
-  mutations: {
-    ...mapGetters(["setCurrentUser"])
   }
 };
 </script>
