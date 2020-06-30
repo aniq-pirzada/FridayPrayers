@@ -134,23 +134,6 @@ export default {
   props: ["mosque"],
   methods: {
     submit() {
-      // const user = new Parse.User();
-      console.log(
-        "mosqueId: ",
-        this.mosque.id,
-        ", ",
-        this.name,
-        ", ",
-        this.phone,
-        ", ",
-        this.age,
-        ", ",
-        this.gender,
-        ", ",
-        this.time,
-        ", ",
-        this.confirmation
-      );
       const Registrations = Parse.Object.extend("Registrations");
       const registration = new Registrations();
       registration.set("mosque", this.mosque);
@@ -160,13 +143,25 @@ export default {
       registration.set("gender", this.gender);
       registration.set("time", this.time);
       registration.set("consent", this.confirmation);
-
       registration.save().then(
-        obj => {
-          console.log("Object Created", obj);
+        () => {
+          this.$emit("complete", {
+            message: "Registration Complete",
+            color: "success"
+          });
+          this.dialog = false;
+          this.name = "";
+          this.phone = "";
+          this.age = "";
+          this.gender = "";
+          this.time = "";
+          this.confirmation = "";
         },
         error => {
-          console.log("Failed to create", error.message);
+          this.$emit("complete", {
+            message: error.message,
+            color: "success"
+          });
         }
       );
     }

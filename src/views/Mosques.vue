@@ -34,6 +34,12 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-container>
+      <v-snackbar v-model="snackbar" :timeout="5000" top :color="snackbarColor">
+        {{ this.snackbarMessage }}
+        <v-btn text @click="snackbar = false">
+          Close
+        </v-btn>
+      </v-snackbar>
       <v-alert v-if="error.error" text type="error">
         {{ error.message }}
       </v-alert>
@@ -44,6 +50,7 @@
         <v-row dense>
           <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
             <CardItem
+              @complete="displaySnackbar"
               v-bind:mosque="mosque"
               v-bind:distance="distance(mosque.get('location'))"
             ></CardItem>
@@ -80,6 +87,12 @@ export default {
   methods: {
     ...mapActions(["findMosqueByLocation"]),
     ...mapMutations(["clearMosques"]),
+    displaySnackbar(e) {
+      console.log(e);
+      this.snackbar = true;
+      this.snackbarMessage = e.message;
+      this.snackbarColor = e.color;
+    },
     async findLocation() {
       const postcodes = new PostcodesIO();
       const postcode = await postcodes.lookup(this.postcode);
@@ -153,6 +166,9 @@ export default {
   computed: mapGetters(["allMosques", "mosquesLoading", "mosqueCount"]),
   data() {
     return {
+      snackbar: true,
+      snackbarMessage: "",
+      snackbarColor: "",
       postcode: this.$route.query.postcode,
       radius: this.$route.query.radius,
       location: null,

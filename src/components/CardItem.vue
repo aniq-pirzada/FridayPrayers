@@ -20,10 +20,9 @@
           }}
         </v-list-item-subtitle>
       </v-list-item-content>
-      <!-- <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar> -->
     </v-list-item>
     <v-card-actions>
-      <RegisterForm v-bind:mosque="mosque" />
+      <RegisterForm v-on="$listeners" v-bind:mosque="mosque" />
     </v-card-actions>
   </v-card>
 </template>
