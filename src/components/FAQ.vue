@@ -11,22 +11,45 @@
 
           <v-divider></v-divider>
         </v-responsive>
-
         <v-responsive
           class="mx-auto title font-weight-light mb-8"
           max-width="720"
         >
-          To register your mosque please use the following form to let us know.
+          <VueFaqAccordion :items="myItems" />
         </v-responsive>
       </v-container>
-
       <div class="py-12"></div>
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+import VueFaqAccordion from "@/components/core/vue-faq-accordion";
+
+export default {
+  components: {
+    VueFaqAccordion
+  },
+  data() {
+    return {
+      myItems: [
+        {
+          title: "How will it work?",
+          value: `Every week on Thursday we will give a list of all the members registered to the respective mosques.<br />
+            The mosques will then contact the members inviting them for the following Jummah on the next day`
+        },
+        {
+          title: "I want to unregister from a mosque",
+          value: `Please send a email to: stating your name and phone number, we will remove your registration data for that mosque within 24hours`
+        },
+        {
+          title: "What happens to my data",
+          value: `Please send a email to: stating your name and phone number, we will remove your registration data for that mosque within 24hours`
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -31,7 +31,12 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="sidebar" absolute disable-resize-watcher>
+    <v-navigation-drawer
+      z-index:2
+      v-model="sidebar"
+      absolute
+      disable-resize-watcher
+    >
       <v-list>
         <v-list-item>
           <v-list-item-content>{{ "Title" }}</v-list-item-content>
