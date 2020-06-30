@@ -11,7 +11,7 @@
             :to="{ name: 'Home' }"
             tag="span"
             style="cursor: pointer;"
-            >Title</router-link
+            >Friday</router-link
           >
         </div>
       </div>
@@ -86,13 +86,13 @@ export default {
           link: "About",
           icon: "mdi-help-circle-outline",
           class: "btnAbout"
-        },
-        {
-          title: "Find",
-          link: "Mosques",
-          icon: "mdi-file-search-outline",
-          class: "btnAbout"
         }
+        // {
+        //   title: "Find",
+        //   link: "Mosques",
+        //   icon: "mdi-file-search-outline",
+        //   class: "btnAbout"
+        // }
       ];
     }
   },

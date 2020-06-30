@@ -1,143 +1,80 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+  <section id="hero">
+    <v-row no-gutters>
+      <v-img
+        :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+        v-bind:style="{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        }"
+      >
+        <v-theme-provider dark>
+          <v-container fill-height>
+            <v-row align="center" class="white--text mx-auto" justify="center">
+              <v-col class="white--text text-center" cols="12" tag="h1">
+                <span
+                  :class="[
+                    $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2'
+                  ]"
+                  class="font-weight-light"
+                >
+                  WELCOME TO
+                </span>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
+                <br />
 
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br />please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank"
-            >Discord Community</a
-          >
-        </p>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
+                <span
+                  :class="[
+                    $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4'
+                  ]"
+                  class="font-weight-black"
+                >
+                  VUETIFY
+                </span>
+                <v-text-field
+                  label="Postcode"
+                  hide-details
+                  single-line
+                  v-model="postcode"
+                  @click:append="changeRoute"
+                  @keydown.enter="changeRoute"
+                  solo
+                  clearable
+                  append-icon="mdi-magnify"
+                />
+              </v-col>
+              <v-btn
+                class="align-self-end"
+                fab
+                outlined
+                @click="$vuetify.goTo('#about-me')"
+              >
+                <v-icon>mdi-chevron-double-down</v-icon>
+              </v-btn>
+            </v-row>
+          </v-container>
+        </v-theme-provider>
+      </v-img>
     </v-row>
-  </v-container>
+  </section>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import router from "../router";
 
 export default Vue.extend({
   name: "HelloWorld",
-
   data: () => ({
-    ecosystem: [
-      {
-        text: "vuetify-loader",
-        href: "https://github.com/vuetifyjs/vuetify-loader"
-      },
-      {
-        text: "github",
-        href: "https://github.com/vuetifyjs/vuetify"
-      },
-      {
-        text: "awesome-vuetify",
-        href: "https://github.com/vuetifyjs/awesome-vuetify"
-      }
-    ],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com"
-      },
-      {
-        text: "Chat",
-        href: "https://community.vuetifyjs.com"
-      },
-      {
-        text: "Made with Vuetify",
-        href: "https://madewithvuejs.com/vuetify"
-      },
-      {
-        text: "Twitter",
-        href: "https://twitter.com/vuetifyjs"
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify"
-      }
-    ],
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer"
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/layout/pre-defined"
-      },
-      {
-        text: "Frequently Asked Questions",
-        href: "https://vuetifyjs.com/getting-started/frequently-asked-questions"
-      }
-    ]
-  })
+    postcode: null
+  }),
+  methods: {
+    changeRoute() {
+      console.log("Postcode: ", this.postcode);
+      router.push({
+        name: "Mosques",
+        query: { postcode: this.postcode, radius: "1" }
+      });
+    }
+  }
 });
 </script>

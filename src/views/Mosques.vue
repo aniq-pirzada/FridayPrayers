@@ -166,7 +166,7 @@ export default {
   computed: mapGetters(["allMosques", "mosquesLoading", "mosqueCount"]),
   data() {
     return {
-      snackbar: true,
+      snackbar: false,
       snackbarMessage: "",
       snackbarColor: "",
       postcode: this.$route.query.postcode,
