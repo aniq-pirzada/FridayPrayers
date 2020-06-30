@@ -8,29 +8,33 @@
     ></router-link>
     <v-app-bar flat absolute scroll-target="#scrolling" class="sticky">
       <v-spacer></v-spacer>
-      <v-text-field
-        label="Search"
-        hide-details
-        single-line
-        solo
-        clearable
-        v-bind:loading="mosquesLoading"
-        v-model="postcode"
-        @click:append="changeRoute"
-        @keydown.enter="changeRoute"
-        append-icon="mdi-magnify"
-      />
-      <v-col cols="2">
-        <v-select
-          v-model="selectedRadius"
-          :items="items"
-          item-text="label"
-          solo
-          hide-details
-          single-line
-          v-on:change="changeRoute"
-        />
-      </v-col>
+      <v-row>
+        <v-col cols="6" sm="6">
+          <v-text-field
+            label="Search"
+            hide-details
+            single-line
+            solo
+            clearable
+            v-bind:loading="mosquesLoading"
+            v-model="postcode"
+            @click:append="changeRoute"
+            @keydown.enter="changeRoute"
+            append-icon="mdi-magnify"
+          />
+        </v-col>
+        <v-col cols="6" sm="6">
+          <v-select
+            v-model="selectedRadius"
+            :items="items"
+            item-text="label"
+            solo
+            hide-details
+            single-line
+            v-on:change="changeRoute"
+          />
+        </v-col>
+      </v-row>
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-container>
