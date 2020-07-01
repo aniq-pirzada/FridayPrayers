@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section id="about-me">
+    <section id="about-me" class="grey lighten-3">
       <div class="py-12"></div>
 
       <v-container class="text-center">
@@ -44,7 +44,7 @@ export default {
         },
         {
           title: "What happens to my data",
-          value: `Please send a email to: stating your name and phone number, we will remove your registration data for that mosque within 24hours`
+          value: `Only the data you provide will be shared with the relevant mosque. If you would like to see or delete your data please send a email to: All data will be deleted once the mosques are fully open and no longer require this service. We do not intend to keep your data for longer then necessary`
         }
       ]
     };

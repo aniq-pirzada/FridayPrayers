@@ -2,10 +2,8 @@
   <section id="hero">
     <v-row no-gutters>
       <v-img
+        class="styleOne"
         :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-        v-bind:style="{
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-        }"
       >
         <v-theme-provider light>
           <v-container fill-height>
@@ -58,7 +56,7 @@ import Vue from "vue";
 import router from "../router";
 
 export default Vue.extend({
-  name: "HelloWorld",
+  name: "Jummah",
   data: () => ({
     postcode: null
   }),
@@ -73,3 +71,77 @@ export default Vue.extend({
   }
 });
 </script>
+<style scoped>
+.box {
+  content: "";
+  height: 500px;
+  width: 100%;
+}
+
+.styleOne {
+  background-color: #16a085;
+  background-image: linear-gradient(67.5deg, #16a085 10%, transparent 10%),
+    linear-gradient(157.5deg, #16a085 10%, transparent 10%),
+    linear-gradient(67.5deg, transparent 90%, #16a085 90%),
+    linear-gradient(157.5deg, transparent 90%, #16a085 90%),
+    linear-gradient(22.5deg, #16a085 10%, transparent 10%),
+    linear-gradient(112.5deg, #16a085 10%, transparent 10%),
+    linear-gradient(22.5deg, transparent 90%, #16a085 90%),
+    linear-gradient(112.5deg, transparent 90%, #16a085 90%),
+    linear-gradient(
+      22.5deg,
+      transparent 33%,
+      #d5d8dc 33%,
+      #d5d8dc 36%,
+      transparent 36%,
+      transparent 64%,
+      #d5d8dc 64%,
+      #d5d8dc 67%,
+      transparent 67%
+    ),
+    linear-gradient(
+      -22.5deg,
+      transparent 33%,
+      #d5d8dc 33%,
+      #d5d8dc 36%,
+      transparent 36%,
+      transparent 64%,
+      #d5d8dc 64%,
+      #d5d8dc 67%,
+      transparent 67%
+    ),
+    linear-gradient(
+      112.5deg,
+      transparent 33%,
+      #d5d8dc 33%,
+      #d5d8dc 36%,
+      transparent 36%,
+      transparent 64%,
+      #d5d8dc 64%,
+      #d5d8dc 67%,
+      transparent 67%
+    ),
+    linear-gradient(
+      -112.5deg,
+      transparent 33%,
+      #d5d8dc 33%,
+      #d5d8dc 36%,
+      transparent 36%,
+      transparent 64%,
+      #d5d8dc 64%,
+      #d5d8dc 67%,
+      transparent 67%
+    );
+  /*guidelines*/
+  /*   linear-gradient(transparent 49%, black 50%, transparent 51%), 
+  linear-gradient(90deg, transparent 49%, black 50%, transparent 51%),
+  linear-gradient(45deg, transparent 49%, black 50%, transparent 51%),
+  linear-gradient(-45deg, transparent 49%, black 50%, transparent 51%),
+  radial-gradient(transparent 69%, black 70%, transparent 71%),
+  linear-gradient(45deg, pink, teal); */
+  background-size: 250px 250px;
+  background-position: -100px 150px, -150px 150px, -150px 100px, -100px 100px,
+    -150px 100px, -100px 100px, -100px 150px, -150px 150px, 0 0, 0 0, 0 0, 0 0;
+  background-repeat: repeat;
+}
+</style>

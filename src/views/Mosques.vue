@@ -47,9 +47,9 @@
       <v-alert v-if="error.error" text type="error">
         {{ error.message }}
       </v-alert>
-      <v-alert v-else-if="allMosques.length < 1" text type="info">
+      <!-- <v-alert v-else-if="allMosques.length < 1" text type="info">
         {{ "No results found" }}
-      </v-alert>
+      </v-alert> -->
       <v-sheet id="scrolling">
         <v-row dense>
           <v-col v-for="mosque in allMosques" :key="mosque.id" cols="12">
@@ -121,7 +121,7 @@ export default {
           return;
         }
       }
-      this.findMosqueByLocation({
+      await this.findMosqueByLocation({
         skip: this.page++,
         location: this.location,
         radius: this.selectedRadius

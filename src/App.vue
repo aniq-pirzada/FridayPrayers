@@ -14,7 +14,7 @@ import Vue from "vue";
 import Footer from "@/components/core/Footer.vue";
 
 export default Vue.extend({
-  name: "App",
+  name: "JummahApp",
   components: { Toolbar, Footer },
 
   data: () => ({

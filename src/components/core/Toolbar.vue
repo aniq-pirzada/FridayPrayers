@@ -11,7 +11,7 @@
             :to="{ name: 'Home' }"
             tag="span"
             style="cursor: pointer;"
-            >Friday</router-link
+            >Jummah</router-link
           >
         </div>
       </div>

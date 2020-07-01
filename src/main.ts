@@ -11,10 +11,10 @@ import "@babel/polyfill";
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
-Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
+Parse.serverURL = "https://parseapi.back4app.com";
 Parse.initialize(
-  "GGnAVOqV5mE3u3ROAfs78lBRrgGNzV2MzlXTDhBg", // This is your Application ID
-  "A93v1w4lsSrB5rm8OnO3SkhFlUqKJUU4yDWpVyXj" // This is your Javascript key
+  "GGnAVOqV5mE3u3ROAfs78lBRrgGNzV2MzlXTDhBg",
+  "A93v1w4lsSrB5rm8OnO3SkhFlUqKJUU4yDWpVyXj"
 );
 
 new Vue({

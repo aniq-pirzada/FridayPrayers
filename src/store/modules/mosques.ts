@@ -60,7 +60,7 @@ const actions = {
     query.find().then(
       results => {
         if (typeof document !== "undefined") {
-          commit("setLoading", false);
+          if (results) commit("setLoading", false);
           commit("setMosques", results);
         }
       },

@@ -55,7 +55,7 @@
                       <ValidationProvider rules="required" v-slot="{ errors }">
                         <v-select
                           prepend-icon="mdi-human-male-boy"
-                          :items="['11-17', '18-29', '30-50', '50-70']"
+                          :items="['11-17', '18-29', '30-50', '51-70']"
                           v-model="age"
                           label="Age"
                           :error="errors.length > 0"
@@ -85,7 +85,7 @@
                           :error="errors.length > 0"
                           :error-messages="errors[0]"
                           v-model="time"
-                          label="Gender"
+                          label="Salaat Time"
                           required
                         ></v-select>
                       </ValidationProvider>
