@@ -27,6 +27,7 @@
                         hide-details
                         single-line
                         v-model="postcode"
+                        @click:append="handleSubmit(changeRoute)"
                         solo
                         clearable
                         append-icon="mdi-magnify"
