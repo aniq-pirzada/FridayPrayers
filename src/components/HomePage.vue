@@ -2,7 +2,7 @@
   <section id="hero">
     <v-row no-gutters>
       <v-img
-        class="styleOne"
+        class="bg"
         :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
       >
         <v-theme-provider light>
@@ -13,7 +13,7 @@
                   :class="[
                     $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2'
                   ]"
-                  class="font-weight-light"
+                  class="font-weight-light display-2 font-weight-bold mb-3"
                 >
                   Search for a mosque to register for Jummah Prayers
                 </span>
@@ -72,73 +72,60 @@ export default Vue.extend({
 });
 </script>
 <style scoped>
-.box {
-  content: "";
-  height: 500px;
-  width: 100%;
-}
-
-.styleOne {
-  background-color: #16a085;
-  background-image: linear-gradient(67.5deg, #16a085 10%, transparent 10%),
-    linear-gradient(157.5deg, #16a085 10%, transparent 10%),
-    linear-gradient(67.5deg, transparent 90%, #16a085 90%),
-    linear-gradient(157.5deg, transparent 90%, #16a085 90%),
-    linear-gradient(22.5deg, #16a085 10%, transparent 10%),
-    linear-gradient(112.5deg, #16a085 10%, transparent 10%),
-    linear-gradient(22.5deg, transparent 90%, #16a085 90%),
-    linear-gradient(112.5deg, transparent 90%, #16a085 90%),
+.bg {
+  background-color: #086972;
+  background-image: linear-gradient(67.5deg, #086972 10%, transparent 10%),
+    linear-gradient(157.5deg, #086972 10%, transparent 10%),
+    linear-gradient(67.5deg, transparent 90%, #086972 90%),
+    linear-gradient(157.5deg, transparent 90%, #086972 90%),
+    linear-gradient(22.5deg, #086972 10%, transparent 10%),
+    linear-gradient(112.5deg, #086972 10%, transparent 10%),
+    linear-gradient(22.5deg, transparent 90%, #086972 90%),
+    linear-gradient(112.5deg, transparent 90%, #086972 90%),
     linear-gradient(
       22.5deg,
       transparent 33%,
-      #d5d8dc 33%,
-      #d5d8dc 36%,
+      #01a9b4 33%,
+      #01a9b4 36%,
       transparent 36%,
       transparent 64%,
-      #d5d8dc 64%,
-      #d5d8dc 67%,
+      #01a9b4 64%,
+      #01a9b4 67%,
       transparent 67%
     ),
     linear-gradient(
       -22.5deg,
       transparent 33%,
-      #d5d8dc 33%,
-      #d5d8dc 36%,
+      #01a9b4 33%,
+      #01a9b4 36%,
       transparent 36%,
       transparent 64%,
-      #d5d8dc 64%,
-      #d5d8dc 67%,
+      #01a9b4 64%,
+      #01a9b4 67%,
       transparent 67%
     ),
     linear-gradient(
       112.5deg,
       transparent 33%,
-      #d5d8dc 33%,
-      #d5d8dc 36%,
+      #01a9b4 33%,
+      #01a9b4 36%,
       transparent 36%,
       transparent 64%,
-      #d5d8dc 64%,
-      #d5d8dc 67%,
+      #01a9b4 64%,
+      #01a9b4 67%,
       transparent 67%
     ),
     linear-gradient(
       -112.5deg,
       transparent 33%,
-      #d5d8dc 33%,
-      #d5d8dc 36%,
+      #01a9b4 33%,
+      #01a9b4 36%,
       transparent 36%,
       transparent 64%,
-      #d5d8dc 64%,
-      #d5d8dc 67%,
+      #01a9b4 64%,
+      #01a9b4 67%,
       transparent 67%
     );
-  /*guidelines*/
-  /*   linear-gradient(transparent 49%, black 50%, transparent 51%), 
-  linear-gradient(90deg, transparent 49%, black 50%, transparent 51%),
-  linear-gradient(45deg, transparent 49%, black 50%, transparent 51%),
-  linear-gradient(-45deg, transparent 49%, black 50%, transparent 51%),
-  radial-gradient(transparent 69%, black 70%, transparent 71%),
-  linear-gradient(45deg, pink, teal); */
   background-size: 250px 250px;
   background-position: -100px 150px, -150px 150px, -150px 100px, -100px 100px,
     -150px 100px, -100px 100px, -100px 150px, -150px 150px, 0 0, 0 0, 0 0, 0 0;
