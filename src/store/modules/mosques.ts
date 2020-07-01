@@ -14,35 +14,6 @@ const getters = {
 };
 
 const actions = {
-  async findMosqueByName({ commit }, payload) {
-    console.log(payload.skip);
-    commit("setLoading", true);
-    const Mosque = Parse.Object.extend("Mosque");
-    const query = new Parse.Query(Mosque);
-    if (payload.searchString) {
-      query.fullText("name", payload.searchString);
-      console.log(payload.searchString);
-    }
-    query.limit(state.limit);
-    query.withCount();
-    query.skip((payload.skip - 1) * state.limit);
-    query.find().then(
-      results => {
-        if (typeof document !== "undefined") {
-          commit("setLoading", false);
-          commit("setMosques", results);
-        }
-      },
-      error => {
-        commit("setLoading", false);
-        if (typeof document !== "undefined")
-          console.log(
-            `Error while fetching ParseObjects: ${JSON.stringify(error)}`
-          );
-        console.error("Error while fetching ParseObjects", error);
-      }
-    );
-  },
   async findMosqueByLocation({ commit }, payload) {
     console.log(payload);
     commit("setLoading", true);
@@ -66,11 +37,9 @@ const actions = {
       },
       error => {
         commit("setLoading", false);
-        if (typeof document !== "undefined")
-          console.log(
-            `Error while fetching ParseObjects: ${JSON.stringify(error)}`
-          );
-        console.error("Error while fetching ParseObjects", error);
+        if (typeof document !== "undefined") {
+          //
+        }
       }
     );
   }

@@ -10,18 +10,24 @@
       <v-spacer></v-spacer>
       <v-row>
         <v-col cols="6" sm="6">
-          <v-text-field
-            label="Search"
-            hide-details
-            single-line
-            solo
-            clearable
-            v-bind:loading="mosquesLoading"
-            v-model="postcode"
-            @click:append="changeRoute"
-            @keydown.enter="changeRoute"
-            append-icon="mdi-magnify"
-          />
+          <validation-observer ref="observer" v-slot="{ handleSubmit }">
+            <v-form @submit.stop.prevent="handleSubmit(changeRoute)">
+              <ValidationProvider rules="required" v-slot="{}">
+                <v-text-field
+                  label="Search"
+                  hide-details
+                  single-line1
+                  solo
+                  clearable
+                  v-bind:loading="mosquesLoading"
+                  v-model="postcode"
+                  @click:append="handleSubmit(changeRoute)"
+                  @keydown.enter="handleSubmit(changeRoute)"
+                  append-icon="mdi-magnify"
+                />
+              </ValidationProvider>
+            </v-form>
+          </validation-observer>
         </v-col>
         <v-col cols="6" sm="6">
           <v-select
@@ -104,7 +110,6 @@ export default {
       else return null;
     },
     async search(resetPage) {
-      // this.$refs.observer.disconnect();
       if (resetPage) {
         this.page = 1;
         this.clearMosques();
